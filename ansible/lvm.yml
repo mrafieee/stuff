@@ -1,0 +1,43 @@
+---
+- hosts: all
+
+  vars:
+    vg_name: 'VGdata'
+    lv_name: 'data'
+    lv_size: '100%FREE'
+    disks: '/dev/sdb'
+    filesystem: 'ext4'
+    mount_point: '/data'
+
+  remote_user: ec2-user
+
+  tasks:
+  - name: "Install lvm"
+    yum:
+      name=lvm2
+      state=present
+      update_cache=yes
+
+  - name: "Create Volume Group"
+    lvg:
+      vg={{ vg_name }}
+      pvs={{ disks }}
+      pesize=1024
+      state=present
+
+  - name: "Create Logical Volume"
+    lvol:
+      vg={{ vg_name }}
+      lv={{ lv_name }}
+      size={{ lv_size }}
+      state=present
+  - name: "Creating new filesystem on new LVM logical volume"
+    filesystem:
+      fstype={{ filesystem }}
+      dev=/dev/{{ vg_name }}/{{ lv_name }}
+
+  - name: "Mount {{ mount_point }}"
+    mount: name={{ mount_point }}
+      src=/dev/{{ vg_name }}/{{ lv_name }}
+      fstype={{ filesystem }}
+      state=mounted
