@@ -1,0 +1,30 @@
+# Datacenter Automation items
+- [ ] PXE server
+- [ ] DNS Server
+- [ ] DHCP Server
+- [ ] Logs and log aggregations
+- [ ] Virtualization solution
+- [ ] Firewall
+- [ ] Web/Application/DB (product) Servers
+  - Windows
+  - Debian
+  - Ubuntu
+  - Redhat
+  - Free Solaris
+  - Free BSD
+- [ ] Servers - HA
+- [ ] Servers - Load balancing
+- [ ] NFS share
+- [ ] NTP server
+- [ ] LDAP
+- [ ] Backup
+- [ ] Monitoring and alerting
+- [ ] Infrastructure level
+- [ ] Application level
+- [ ] Source version control system
+- [ ] CI/CD servers
+- [ ] Configuration management system
+- [ ] Caching/VPN/proxying?!?
+- [ ] Documentation server
+- [ ] Collaboration Tool
+- [ ] Internet
