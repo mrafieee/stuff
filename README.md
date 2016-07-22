@@ -22,8 +22,9 @@
 - [ ] Infrastructure level
 - [ ] Application level
 - [ ] Source version control system
-- [ ] CI/CD servers
+- [ ] CI/CD pipeline
 - [ ] Configuration management system
+- [ ] Provisioning system
 - [ ] Caching/VPN/proxying?!?
 - [ ] Documentation server
 - [ ] Collaboration Tool
