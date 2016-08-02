@@ -1,4 +1,5 @@
 # Datacenter Automation items
+- [ ] Hosts naming convention
 - [ ] PXE server
 - [ ] DNS Server
 - [ ] DHCP Server
