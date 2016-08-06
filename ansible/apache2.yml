@@ -1,0 +1,20 @@
+---
+- hosts: webserver
+  handlers:
+    - name: "restart apache2"
+      service: name=apache2 state=restarted
+
+  tasks:
+    - name: "Ensure apache2 package be present"
+      apt:
+        name=apache2
+        update_cache=yes
+        state=present
+      notify:
+        - restart apache2
+
+    - name: "Ensure apache2 is running (and enable it at boot)"
+      service: name=apache2 state=started enabled=yes
+
+    - name: "Modify html file"
+      command: 'sh -c "echo \<h1\>Hostname: {{ hostvars[host]['ansible_hostname'] }} \({{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}\)\<\/h1\> >> /var/www/index.html"'
