@@ -1,0 +1,4 @@
+---
+# Generic servers
+syslog_ip: "192.168.2.99"
+monitoring_ip: "192.168.2.98"

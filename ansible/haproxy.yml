@@ -3,7 +3,7 @@
   handlers:
     - name: "restart haproxy"
       service: name=haproxy state=restarted
- 
+
   tasks:
     - name: "Ensure haproxy package be present"
       apt:
@@ -16,5 +16,10 @@
 
     - name: "Recreate basic haproxy config file"
       template:
-        src=/mytemplates/foo.j2
+        src=files/haproxy/haproxy.cfg
         dest=/etc/haproxy/haproxy.cfg
+      notify:
+        - restart haproxy
+
+    - name: "Ensure haproxy is running (and enable it at boot)"
+      service: name=haproxy state=started enabled=yes

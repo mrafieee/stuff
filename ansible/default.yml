@@ -1,0 +1,46 @@
+---
+- hosts: all
+
+  handlers:
+    - name: "restart rsyslog"
+      service: name=rsyslog state=restarted
+
+  tasks:
+    - name: "Ensure default packages are present"
+      apt:
+        name={{ item }}
+        state=present
+        update_cache=yes
+      with_items:
+        - openssh-server
+        - nano
+        - sudo
+        - ntp
+        - rsyslog
+
+    - name: "Add admin group"
+      group:
+        name=admin
+        state=present
+
+    - name: "Add admin user"
+      user:
+        state=present
+        name=admin
+        group=admin
+        comment="Admin user created by ansible"
+        groups=sudo
+        append=yes
+        createhome=no
+
+    - name: "Copy ssh keys to authorized_keys"
+      command: cat {{ item }} >> /root/.ssh/authorized_keys
+      with_fileglob:
+        - files/ssh/keys/*
+
+    - name: "Copy rsyslog configuration"
+      template:
+        src=files/rsyslog/rsyslog.d-90-graylog2.conf.j2
+        dest=/etc/rsyslog.d/90-graylog2.conf
+      notify:
+        - restart rsyslog

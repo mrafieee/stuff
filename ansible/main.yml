@@ -1,5 +1,5 @@
 ---
-- include: packages.yml
-- include: users.yml
+- include: default.yml
+#- include: users.yml
 - include: haproxy.yml
-- include: apache.yml
+- include: apache2.yml

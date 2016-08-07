@@ -1,0 +1,3 @@
+[submodule "ansible/roles/graylog-ansible-role"]
+	path = ansible/roles/graylog-ansible-role
+	url = https://github.com/Graylog2/graylog-ansible-role.git
