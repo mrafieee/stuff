@@ -12,7 +12,7 @@
         state=present
 
     - name: "Rename original haproxy config file"
-      command: mv /etc/haproxy/haproxy.cfg{,.original}
+      command: /bin/mv -f /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.original
 
     - name: "Recreate basic haproxy config file"
       template:
