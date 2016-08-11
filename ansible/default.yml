@@ -3,6 +3,7 @@
 
   handlers:
     - name: "restart rsyslog"
+      become: true
       service: name=rsyslog state=restarted
 
   tasks:
@@ -34,8 +35,9 @@
         createhome=no
 
     - name: "Copy ssh keys to authorized_keys"
-      command: cat {{ item }} >> /root/.ssh/authorized_keys
-      with_fileglob:
+      become: true
+      authorized_key: user=root key="{{ item }}"
+      with_file:
         - files/ssh/keys/*
 
     - name: "Copy rsyslog configuration"

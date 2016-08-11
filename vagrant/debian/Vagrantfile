@@ -3,49 +3,49 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "web1" do |web1|
+    web1.vm.hostname = "web1"
     web1.vm.box = "debian/jessie64"
     web1.vm.provision "ansible" do |ansible|
-      ansible.playbook = "../../ansible/apache2.yml"
+      ansible.playbook = "../../ansible/main.yml"
       ansible.limit = "192.168.2.101"
       ansible.inventory_path = "../../ansible/inventory/hosts"
       ansible.sudo = true
     end
-
     web1.vm.network "public_network", ip: "192.168.2.101", bridge: "wlan0"
     web1.vm.provider "virtualbox" do |v|
-      v.memory = 512
+      v.memory = 128
       v.cpus = 1
     end
   end
 
   config.vm.define "web2" do |web2|
+    web2.vm.hostname = "web2"
     web2.vm.box = "debian/jessie64"
     web2.vm.provision "ansible" do |ansible|
-      ansible.playbook = "../../ansible/apache2.yml"
+      ansible.playbook = "../../ansible/main.yml"
       ansible.limit = "192.168.2.102"
       ansible.inventory_path = "../../ansible/inventory/hosts"
       ansible.sudo = true
     end
-
     web2.vm.network "public_network", ip: "192.168.2.102", bridge: "wlan0"
     web2.vm.provider "virtualbox" do |v|
-      v.memory = 512
+      v.memory = 128
       v.cpus = 1
     end
   end
 
   config.vm.define "haproxy" do |haproxy|
+    haproxy.vm.hostname = "haproxy"
     haproxy.vm.box = "debian/jessie64"
     haproxy.vm.provision "ansible" do |ansible|
-      ansible.playbook = "../../ansible/haproxy.yml"
+      ansible.playbook = "../../ansible/main.yml"
       ansible.limit = "192.168.2.100"
       ansible.inventory_path = "../../ansible/inventory/hosts"
       ansible.sudo = true
     end
-
     haproxy.vm.network "public_network", ip: "192.168.2.100", bridge: "wlan0"
     haproxy.vm.provider "virtualbox" do |v|
-      v.memory = 512
+      v.memory = 256
       v.cpus = 1
     end
   end
