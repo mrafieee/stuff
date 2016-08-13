@@ -36,13 +36,13 @@
 
     - name: "Copy ssh keys to authorized_keys"
       become: true
-      authorized_key: user=root key="{{ item }}"
-      with_file:
-        - files/ssh/keys/*
+      authorized_key: user=root key="{{ lookup('file', '{{ item }}') }}"
+      with_fileglob:
+        - group_files/ssh/keys/*
 
     - name: "Copy rsyslog configuration"
       template:
-        src=files/rsyslog/rsyslog.d-90-graylog2.conf.j2
+        src=group_files/rsyslog/rsyslog.d-90-graylog2.conf.j2
         dest=/etc/rsyslog.d/90-graylog2.conf
       notify:
         - restart rsyslog

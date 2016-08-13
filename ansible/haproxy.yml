@@ -16,7 +16,7 @@
 
     - name: "Recreate basic haproxy config file"
       template:
-        src=files/haproxy/haproxy.cfg
+        src=group_files/haproxy/haproxy.cfg
         dest=/etc/haproxy/haproxy.cfg
       notify:
         - restart haproxy
