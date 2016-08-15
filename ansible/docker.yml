@@ -1,0 +1,32 @@
+---
+- hosts: docker
+  handlers:
+    - name: "restart docker"
+      service: name=docker state=restarted
+
+  tasks:
+    - name: "Ensure docker prerequisites be present"
+      apt:
+        name={{ item }}
+        state=present
+      with_items:
+        - apt-transport-https
+        - ca-certificates
+      register: prerequisites_installed
+
+    - name: "Ensure docker reposotory be present"
+      when: prerequisites_installed|succeeded
+      apt_repository:
+        repo='deb https://apt.dockerproject.org/repo debian-jessie main'
+        state=present
+        filename='docker.list'
+        update_cache=yes
+      register: docker_repo_added
+
+    - name: "Ensure docker reposotory be present"
+      when: docker_repo_added|succeeded
+      apt:
+        name=docker-engine
+        state=present
+      notify:
+        - restart docker
