@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: lvm
 
   vars:
     vg_name: 'VGdata'

@@ -1,5 +1,6 @@
 ---
 - include: default.yml
-# - include: lvm.yml
+- include: lvm.yml
 - include: haproxy.yml
 - include: apache2.yml
+- include: docker.yml

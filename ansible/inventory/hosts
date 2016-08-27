@@ -1,11 +1,10 @@
-[all]
-192.168.2.[90:254]
-
-[docker]
+[localhost]
 localhost
 127.0.0.1
+192.168.2.[90:254]
 
-[webservers]
+
+[webserver]
 192.168.2.101
 192.168.2.102
 
@@ -14,3 +13,16 @@ localhost
 
 [syslog]
 192.168.2.99
+
+[docker]
+192.168.2.105
+192.168.2.106
+192.168.2.107
+192.168.2.108
+192.168.2.109
+
+[all-test:children]
+syslogl
+haproxy
+webserver
+docker
