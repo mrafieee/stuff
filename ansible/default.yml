@@ -46,3 +46,20 @@
         dest=/etc/rsyslog.d/90-graylog2.conf
       notify:
         - restart rsyslog
+
+    - name: Add mappings to /etc/hosts
+      blockinfile:
+        dest: /etc/hosts
+        block: |
+          {{item.ip}} {{item.name}}
+        marker: "# {mark} ANSIBLE MANAGED BLOCK {{item.name}}"
+      with_items:
+          - { name: node1, ip: 192.169.2.111 }
+          - { name: node2, ip: 192.169.2.112 }
+          - { name: node3, ip: 192.169.2.113 }
+          - { name: node4, ip: 192.169.2.114 }
+          - { name: node5, ip: 192.169.2.115 }
+          - { name: web1, ip: 192.169.2.101 }
+          - { name: web2, ip: 192.169.2.102 }
+          - { name: haproxy, ip: 192.169.2.100 }
+          - { name: graylog, ip: 192.169.2.102 }

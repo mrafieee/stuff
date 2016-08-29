@@ -23,10 +23,11 @@
         update_cache=yes
       register: docker_repo_added
 
-    - name: "Ensure docker reposotory be present"
+    - name: "Ensure docker package be installed"
       when: docker_repo_added|succeeded
       apt:
         name=docker-engine
         state=present
+        force=yes
       notify:
         - restart docker
