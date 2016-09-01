@@ -18,6 +18,7 @@
         - sudo
         - ntp
         - rsyslog
+        - curl
 
     - name: "Add admin group"
       group:

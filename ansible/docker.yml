@@ -31,3 +31,6 @@
         force=yes
       notify:
         - restart docker
+        
+    - name: "Pull ubuntu container"
+      command: "docker pull ubuntu"
